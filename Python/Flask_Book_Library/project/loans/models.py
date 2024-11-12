@@ -22,7 +22,7 @@ class Loan(db.Model):
 
     @validates('book_name', 'customer_name', 'original_author')
     def validate_name_and_book_name(self, key, value):
-        if len(key) > self.max_len:
+        if len(value) > self.max_len:
             raise ValueError(f"{key.capitalize()} too long.")
         pattern = self.VALID_BOOK_NAME_PATTERN if key == 'book_name' else self.VALID_NAME_PATTERN
         if not re.match(pattern, value):

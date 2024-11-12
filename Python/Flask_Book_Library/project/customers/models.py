@@ -17,7 +17,7 @@ class Customer(db.Model):
 
     @validates('name', 'city')
     def validate_name_and_city(self, key, value):
-        if len(key) > self.max_len:
+        if len(value) > self.max_len:
             raise ValueError(f"{key.capitalize()} too long.")
         pattern = self.VALID_NAME_PATTERN if key == 'name' else self.VALID_CITY_PATTERN
         if not re.match(pattern, value):

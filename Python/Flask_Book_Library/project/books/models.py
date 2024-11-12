@@ -20,7 +20,7 @@ class Book(db.Model):
     @validates('name', 'author')
     def validate_name_and_author(self, key, value):
         pattern = self.VALID_NAME_PATTERN if key == 'name' else self.VALID_AUTHOR_PATTERN
-        if len(key) > self.max_len:
+        if len(value) > self.max_len:
             raise ValueError(f"{key.capitalize()} too long.")
         if not re.match(pattern, value):
             raise ValueError(f"{key.capitalize()} contains invalid characters.")
